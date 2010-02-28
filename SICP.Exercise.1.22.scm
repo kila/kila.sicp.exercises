@@ -1,16 +1,5 @@
 ;;; Exercise 1.22
 
-(define (even? x)
-  (= (remainder x 2) 0))
-
-;testing even?
-
-(even? 4)  ; #t
-(even? 76) ; #t
-(even? 77) ; #f
-
-
-
 (define (square x)
   (* x x))
 
@@ -28,39 +17,29 @@
 (define (prime? n)
   (= n (smallest-divisor n)))
 
-(define (report-prime elapsed-time)
-  (display " *** ")
-  (display elapsed-time)
-  0)
-
-(define (start-prime-test n start-time)
-  (if (prime? n)
-      (report-prime (- (runtime) start-time))))
-
-(define (timed-prime-test n)
+(define (report-prime n elapsed-time) ;modified
   (newline)
   (display n)
-  (start-prime-test n (runtime)))
+  (display " *** ")
+  (display elapsed-time))
 
-(timed-prime-test 1009)
+(define (start-prime-test n start-time)  ;modified
+  (if (prime? n)
+      (report-prime n (- (runtime) start-time))))
+
+(define (timed-prime-test n)   ;moved if prime? from start-prime-est
+  (if (prime? n)
+      (start-prime-test n (runtime))))
 
 (define (search-for-primes low high)
-  (sfp-iter low high))
+  (if (< low high)
+      (sfp-iter low high)
+      (display "Invalid Input")))
 
 (define (sfp-iter low high)
-  (cond ((> low high) 0)
-        ((even? low) (sfp-iter (+ low 1) high))
-        ((prime? low) (+ (sfp-iter (+ low 2) high)
-                         (timed-prime-test low)))
-        (else (sfp-iter (+ low 1) high))))
+  (timed-prime-test low)
+  (cond ((> low high) "Finished")
+        ((even? low) (sfp-iter (+ low 1) high)) ;start with odd
+        (else (sfp-iter (+ low 2) high))))      ;check only odd
 
-(search-for-primes 100000000 10000000000)
-          
-
-
-  
-
-
-                   
-;;testing
-
+(search-for-primes 1000000000 1000010000)

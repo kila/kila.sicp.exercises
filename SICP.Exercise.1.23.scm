@@ -1,5 +1,4 @@
 ;;; Exercise 1.23
-;testing git diff
 
 (define (square x)
   (* x x))
