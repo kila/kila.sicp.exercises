@@ -1,5 +1,10 @@
 ;;; Exercise 1.22
 
+
+; The procedures in SICP were written such that
+; prime? was only called once. I rewrote parts
+; of them
+
 (define (square x)
   (* x x))
 
@@ -42,4 +47,18 @@
         ((even? low) (sfp-iter (+ low 1) high)) ;start with odd
         (else (sfp-iter (+ low 2) high))))      ;check only odd
 
-(search-for-primes 1000000000 1000010000)
+
+;testing
+; testing code taken from
+; http://community.schemewiki.org/?sicp-ex-1.22
+
+(search-for-primes 1000000000 1000000021)       ; median  0.09 
+(search-for-primes 10000000000 10000000061)     ; median  0.28 
+(search-for-primes 100000000000 100000000057)   ; median  0.91 
+(search-for-primes 1000000000000 1000000000063) ; median  3.01
+
+;The testing results confirm that as input grows,
+;process times grows on order sqrt(n)
+
+;Input increases by a factor of 10, process grows
+;by ~3, which is ~sqrt(10)
