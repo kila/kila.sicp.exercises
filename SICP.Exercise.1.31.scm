@@ -32,8 +32,8 @@
         (+ k 1)
         (+ k 2)))
   (* 4
-     (/ (product-iter yk-top 1.0 n)
-        (product-iter yk-bot 1.0 n))))
+     (/ (product-iter yk-top 1 n)
+        (product-iter yk-bot 1 n))))
 
 (mmm-pi 169)
 
