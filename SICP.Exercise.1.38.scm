@@ -14,6 +14,7 @@
 
 (define (n k) 1.0)
 
+;this calcs the continued fraction expansion for e-2
 (define (cont-frac n d k)
   (define (iter i ans)
     (let ((nk (n i))
